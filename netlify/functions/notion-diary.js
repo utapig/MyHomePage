@@ -11,13 +11,12 @@ export async function handler(event, context) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      sorts: [{ property: "Date", direction: "descending" }],
+      sorts: [{ property: "作成日時", direction: "descending" }],
       page_size: 3
     })
   });
 
   const data = await response.json();
-  console.log(data)
   return {
     statusCode: 200,
     body: JSON.stringify(data)
