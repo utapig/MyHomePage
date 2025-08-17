@@ -34,6 +34,7 @@
             fetch("/.netlify/functions/notion-diary")
             .then(res => res.json())
             .then(data => {
+                console.log("Notionからのレスポンス:", data); // ← ここで確認
                 const container = document.getElementById("diary");
                 data.results.forEach(page => {
                 const title = page.properties.Title.title[0]?.plain_text ?? "(No Title)";
