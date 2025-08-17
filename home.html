@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホームページ</title>
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    .underline-hover {
+        text-decoration: none;
+    }
+    .underline-hover:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar fixed-top navbar-light bg-transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4 fs-3 fw-bold" href="#">MyHomepage</a>
+            <a class="nav-link link-dark underline-hover me-4 fs-3 fw-bold" href="#">About</a>
+        </div>
+    </nav>
+</header>
+<main class="mt-5">
+    <div class="container-fluid pt-5 px-5">
+        <h3>日記</h3>
+        <div id="diary"></div>
+        <h3>趣味</h3>
+
+        <script>
+            fetch("/.netlify/functions/notion-diary")
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById("diary");
+                data.results.forEach(page => {
+                const title = page.properties.Title.title[0]?.plain_text ?? "(No Title)";
+                const date = page.properties.Date.date.start;
+                const div = document.createElement("div");
+                div.innerHTML = `<h3>${title}</h3><p>${date}</p>`;
+                container.appendChild(div);
+                });
+            });
+        </script>
+    </div>
+</main>
+</body>
+</html>
