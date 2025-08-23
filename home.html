@@ -27,27 +27,33 @@
 <main class="mt-5">
     <div class="container-fluid pt-5 px-5">
         <h3>日記</h3>
-        <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action" id="diary">
-            </button>
-        </div>
+        <div class="list-group" id="diary"></div>
         <h3>趣味</h3>
+
 
         <script>
             fetch("/.netlify/functions/notion-diary")
             .then(res => res.json())
             .then(data => {
-                console.log("Notionからのレスポンス:", data); // ← ここで確認
+                console.log("Notionからのレスポンス:", data);
                 const container = document.getElementById("diary");
+
                 data.results.forEach(page => {
-                const title = page.properties["名前"].title[0]?.plain_text ?? "(No Title)";
-                const date = page.properties["作成日時"].created_time;
-                const div = document.createElement("div");
-                div.innerHTML = `${title}:${date}`;
-                container.appendChild(div);
+                    const title = page.properties["名前"].title[0]?.plain_text ?? "(No Title)";
+                    const date = page.properties["作成日時"].created_time;
+
+                    // ボタンを作成
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "list-group-item list-group-item-action";
+                    button.textContent = `${title} : ${date}`;
+
+                    // リストに追加
+                    container.appendChild(button);
                 });
             });
         </script>
+
     </div>
 </main>
 </body>
