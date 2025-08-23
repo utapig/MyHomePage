@@ -43,7 +43,7 @@
                 const title = page.properties["名前"].title[0]?.plain_text ?? "(No Title)";
                 const date = page.properties["作成日時"].created_time;
                 const div = document.createElement("div");
-                div.innerHTML = `<h2>${title}</h2><p>${date}</p>`;
+                div.innerHTML = `${title}:${date}`;
                 container.appendChild(div);
                 });
             });
