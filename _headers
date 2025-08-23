@@ -1,2 +1,3 @@
-/*
-  Content-Type: text/html; charset=UTF-8
+git add .
+git commit -m "<コミットメッセージ>"
+git push origin main
